@@ -1,0 +1,3 @@
+static int next(void){
+
+}
