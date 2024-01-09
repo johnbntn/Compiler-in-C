@@ -3,6 +3,10 @@
 #include "decl.h"
 #include <stdio.h>
 
+static void putback(int c) {
+  Putback = c;
+}
+
 static int next(void){
     int c;
 
@@ -20,8 +24,27 @@ static int next(void){
     }
 }
 
-static void putback(int c) {
-  Putback = c;
+// Return the position of character c
+// in string s, or -1 if c not found
+static int chrpos(char *s, int c) {
+  char *p;
+
+  p = strchr(s, c);
+  return (p ? p - s : -1);
+}
+
+static int scanint(int c) {
+  int k, val = 0;
+
+  // Convert each character into an int value
+  while ((k = chrpos("0123456789", c)) >= 0) {
+    val = val * 10 + k;
+    c = next();
+  }
+
+  // We hit a non-integer character, put it back.
+  putback(c);
+  return val;
 }
 
 static int skip(void){
@@ -67,27 +90,4 @@ int scan(struct token *t) {
 
     return 1;
     }
-}
-
-static int scanint(int c) {
-  int k, val = 0;
-
-  // Convert each character into an int value
-  while ((k = chrpos("0123456789", c)) >= 0) {
-    val = val * 10 + k;
-    c = next();
-  }
-
-  // We hit a non-integer character, put it back.
-  putback(c);
-  return val;
-}
-
-// Return the position of character c
-// in string s, or -1 if c not found
-static int chrpos(char *s, int c) {
-  char *p;
-
-  p = strchr(s, c);
-  return (p ? p - s : -1);
 }
