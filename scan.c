@@ -23,10 +23,10 @@ static int next(void){
 
     c = fgetc(Infile);
 
-    if ("\n" == c){
+    if ('\n' == c){
         Line++;
-        return c;
     }
+    return c;
 }
 
 static void putback(int c) {
@@ -38,7 +38,7 @@ static int skip(void){
 
     c = next();
 
-    while (" " == c || "\n" == c || "\t" == c || "\r" == c || "\v" == c || "\f" == c){
+    while (' ' == c || '\n' == c || '\t' == c || '\r' == c || '\v' == c || '\f' == c){
         c = next();
     }
 
@@ -88,6 +88,6 @@ int scan(struct token *t) {
             printf("Unrecognizable token %c on line %d", c, Line);
             exit(1);
 
-    return 1;
     }
+    return 1;
 }
