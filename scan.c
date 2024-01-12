@@ -3,8 +3,13 @@
 #include "decl.h"
 #include <stdio.h>
 
-static void putback(int c) {
-  Putback = c;
+// Return the position of character c
+// in string s, or -1 if c not found
+static int chrpos(char *s, int c) {
+  char *p;
+
+  p = strchr(s, c);
+  return (p ? p - s : -1);
 }
 
 static int next(void){
@@ -24,13 +29,20 @@ static int next(void){
     }
 }
 
-// Return the position of character c
-// in string s, or -1 if c not found
-static int chrpos(char *s, int c) {
-  char *p;
+static void putback(int c) {
+  Putback = c;
+}
 
-  p = strchr(s, c);
-  return (p ? p - s : -1);
+static int skip(void){
+    int c;
+
+    c = next();
+
+    while (" " == c || "\n" == c || "\t" == c || "\r" == c || "\v" == c || "\f" == c){
+        c = next();
+    }
+
+    return c; 
 }
 
 static int scanint(int c) {
@@ -47,24 +59,12 @@ static int scanint(int c) {
   return val;
 }
 
-static int skip(void){
-    int c;
-
-    c = next();
-
-    while (" " == c || "\n" == c || "\t" == c || "\r" == c || "\v" == c || "\f" == c){
-        c = next();
-    }
-
-    return c; 
-}
-
 int scan(struct token *t) {
     int c;
 
     c = skip();
 
-    switch(c){
+    switch(c) {
         case EOF:
             return 0;
         case '+':
