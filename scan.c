@@ -85,7 +85,7 @@ int scan(struct token *t) {
                 t -> token = T_INTLIT;
                 break;
             }
-            printf("Unrecognizable token %c on line %d", c, Line);
+            printf("Unrecognizable token %c on line %d\n", c, Line);
             exit(1);
 
     }
