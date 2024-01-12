@@ -1,6 +1,6 @@
-#include "data.h"
-#include "defs.h"
-#include "decl.h"
+#include "Headers/data.h"
+#include "Headers/defs.h"
+#include "Headers/decl.h"
 #include <stdio.h>
 
 // Return the position of character c
