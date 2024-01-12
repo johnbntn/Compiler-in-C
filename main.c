@@ -6,7 +6,6 @@
 #include <errno.h>
 
 
-
 // Initialise global variables
 static void init() {
   Line = 1;
