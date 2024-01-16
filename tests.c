@@ -4,7 +4,7 @@
 #include <string.h>
 
 FILE *fp;
-char line[101]; //LINES CANT BE MORE THAN 100 CHARACTERS
+char line[201]; //LINES CANT BE MORE THAN 200 CHARACTERS
 char *content = NULL;
 size_t content_size = 0;
 
