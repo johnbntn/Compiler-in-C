@@ -4,8 +4,7 @@
 #include <string.h>
 
 FILE *fp;
-int status;
-char line[100];
+char line[101]; //LINES CANT BE MORE THAN 100 CHARACTERS
 char *content = NULL;
 size_t content_size = 0;
 
@@ -13,12 +12,17 @@ size_t content_size = 0;
 char lexTest1Output[] = "Token intlit, value 3\nToken +\nToken intlit, value 3\nToken intlit, value 4\n";
 
 int lexTester(void){
+    //use popen to get readable output from terminal
     fp = popen("./scanner Tests/lexTest1", "r");
     while (fgets(line, sizeof(line), fp) != NULL){
+        //add more size for reallocation
         content_size += strlen(line);
-        content = realloc(content, content_size + 1); // +1 for the null terminator
+        //allocate more memory for each line with +1 for null terminator
+        content = realloc(content, content_size + 1);
         strcat(content, line);
     }
+    
+    //close pipe
     pclose(fp);
     assert(!strcmp(lexTest1Output, content));
     printf("lexTest1 PASSED\n");
