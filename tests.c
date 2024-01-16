@@ -20,6 +20,7 @@ int lexTester(void){
         //allocate more memory for each line with +1 for null terminator
         content = realloc(content, content_size + 1);
         strcat(content, line);
+        memset(line, 0, sizeof(line));
     }
     
     //close pipe
