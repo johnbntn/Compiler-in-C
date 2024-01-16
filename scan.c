@@ -15,6 +15,7 @@ static int chrpos(char *s, int c) {
 static int next(void){
     int c;
 
+    //check if character should be putback
     if (Putback){
         c = Putback;
         Putback = 0;
@@ -38,6 +39,7 @@ static int skip(void){
 
     c = next();
 
+    //check for whitespace characters
     while (' ' == c || '\n' == c || '\t' == c || '\r' == c || '\v' == c || '\f' == c){
         c = next();
     }
@@ -64,6 +66,7 @@ int scan(struct token *t) {
 
     c = skip();
 
+    //check character value and assign it a value
     switch(c) {
         case EOF:
             return 0;
