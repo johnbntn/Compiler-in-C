@@ -31,4 +31,4 @@ Token /
 Token intlit, value 8
 ~~~
 
-
+Note that a lexer does not actually tell your computer how to run a program, merely creates the building blocks. Parsing and assembling take these tokens and communicate them to the cpu according to a set of rules defined in the parser, allowing for the intended output.
