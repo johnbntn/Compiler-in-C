@@ -31,7 +31,6 @@ int lexTester(void){
     assert(!strcmp(lexTest1Output, content));
     content = NULL;
     printf("\nlexTest1 PASSED\n");
-    //lexTest1
 
     //lexTest2
     fp = popen("./scanner Tests/lexTest2", "r");
@@ -52,8 +51,10 @@ int lexTester(void){
     stringMaker();
     assert(!strcmp(lexTest4Output, content));
     printf("lexTest4 PASSED\n");
+    
     pclose(fp);
-
+    free(content);
+    
     printf("===== ALL TESTS PASSED =====\n");
     return 0;
 }
