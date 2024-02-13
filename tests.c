@@ -15,6 +15,7 @@ char lexTest2Output[] = "Unrecognizable token T on line 1\n";
 char lexTest3Output[] = "Token intlit, value 4\nToken +\nToken intlit, value 57\nToken *\nToken intlit, value 3\nToken /\nToken intlit, value 8\n";
 char lexTest4Output[] = "Token intlit, value 4\nToken +\nToken intlit, value 4\nUnrecognizable token a on line 1\n";
 
+//get output string from terminal and concacate the lines
 void stringMaker(){
     while (fgets(line, sizeof(line), fp) != NULL){
         content_size += strlen(line);
@@ -24,6 +25,7 @@ void stringMaker(){
     }
 }
 
+//compare output to expected output
 int lexTester(void){
     //lexTest1
     fp = popen("./scanner Tests/lexTest1", "r");
