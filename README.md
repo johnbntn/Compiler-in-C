@@ -12,7 +12,7 @@ As of right now, I have created a basic lexer that recognizes arithmetic operato
 
 Lexical analysis is the process of breaking down code into segments called tokens, allowing the computer to process them. Telling the computer what tokens mean allows it to process them.
 
-FOr my lexer, a file containing:
+For my lexer, a file containing:
 ~~~
  4 +
 57
