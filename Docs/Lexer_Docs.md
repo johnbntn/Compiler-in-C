@@ -22,10 +22,11 @@ In `defs.h` we use an `enum` to define different tokens and and a `struct token`
 To use the scanner:
 1. Fork and clone this repository into a your personal computer
 2. Type `make` into your terminal
-3. typer `scanner [/PathToFile/File]
+3. typer `scanner /PathToFile/File`
 
 Testing:
 - Execute `make test`
+
 Cleaning
 - Execute `make clean`
 
@@ -38,7 +39,7 @@ This lexer uses assert statements to compare expected output to actual output. T
 2. Create an expected output string under the `//Correct Test Outputs` comments
 3. Add a `content = NULL` line under the last output test
 4. Add your own test using the following structure:
-~~~ C#
+~~~ C
     fp = popen("./scanner Tests/lexTest[n]_[Type]", "r");
     stringMaker();
     assert(!strcmp(lexTest[n]Output, content));
