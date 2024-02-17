@@ -4,7 +4,6 @@
 #include <string.h>
 
 FILE *fp;
-FILE *pp;
 char line[201]; //---LINES CANT BE MORE THAN 200 CHARACTERS--- (shouldn't matter b/c only reading token info)
 char *content = NULL;
 size_t content_size = 0;
@@ -28,28 +27,28 @@ void stringMaker(){
 //compare output to expected output
 int lexTester(void){
     //lexTest1
-    fp = popen("./scanner Tests/lexTest1", "r");
+    fp = popen("./scanner Tests/lexTest1_StdInput", "r");
     stringMaker();
     assert(!strcmp(lexTest1Output, content));
     content = NULL;
     printf("\nlexTest1 PASSED\n");
 
     //lexTest2
-    fp = popen("./scanner Tests/lexTest2", "r");
+    fp = popen("./scanner Tests/lexTest2_OnlyText", "r");
     stringMaker();
     assert(!strcmp(lexTest2Output, content));
     printf("lexTest2 PASSED\n");
     content = NULL;
 
     //lexTest3
-    fp = popen("./scanner Tests/lexTest3", "r");
+    fp = popen("./scanner Tests/lexTest3_StdInput", "r");
     stringMaker();
     assert(!strcmp(lexTest3Output, content));
     printf("lexTest3 PASSED\n");
     content = NULL;
 
     //lextTest4
-    fp = popen("./scanner Tests/lexTest4", "r");
+    fp = popen("./scanner Tests/lexTest4_InvalidToken", "r");
     stringMaker();
     assert(!strcmp(lexTest4Output, content));
     printf("lexTest4 PASSED\n");
