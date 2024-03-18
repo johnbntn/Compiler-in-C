@@ -2,7 +2,7 @@ scanner: main.c scan.c
 	gcc -o scanner -g main.c scan.c
 	
 test: main.c scan.c tests.c
-	gcc -o scanner -g main.c scan.c
+	make scanner
 	gcc -o tester -g tests.c
 	./tester
 

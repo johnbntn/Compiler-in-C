@@ -20,9 +20,9 @@ In `defs.h` we use an `enum` to define different tokens and and a `struct token`
 ## Usage
 
 To use the scanner:
-1. Fork and clone this repository into a your personal computer
-2. Type `make` into your terminal
-3. typer `scanner /PathToFile/File`
+1. Fork and clone this repository onto your personal computer
+2. Type `make` into your terminal at correct location
+3. type `scanner /PathToFile/File`
 
 Testing:
 - Execute `make test`
