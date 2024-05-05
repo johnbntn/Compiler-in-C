@@ -1,11 +1,11 @@
-scanner: main.c scan.c
-	gcc -o scanner -g main.c scan.c
+scanner: mainLex.c scan.c
+	gcc -o scanner -g mainLex.c scan.c
 	
-test: main.c scan.c tests.c
+lexTester: mainLex.c scan.c lexTester.c
 	make scanner
-	gcc -o tester -g tests.c
-	./tester
+	gcc -o lexTester -g lexTester.c
+	./lexTester
 
 clean:
 	rm -f scanner *.o
-	rm -f tester *.o
+	rm -f lexTester *.o

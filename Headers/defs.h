@@ -13,3 +13,16 @@ struct token {
   int token;
   int intValue;
 };
+
+// AST node types
+enum {
+  A_ADD, A_SUBTRACT, A_MULTIPLY, A_DIVIDE, A_INTLIT
+};
+
+//AST Node structure
+struct ASTnode {
+  int op;
+  struct ASTnode *left;
+  struct ASTnode *right;
+  int intvalue;
+};

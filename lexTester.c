@@ -56,7 +56,7 @@ int lexTester(void){
     pclose(fp);
     free(content);
     
-    printf("===== ALL TESTS PASSED =====\n");
+    printf("===== ALL LEXER TESTS PASSED =====\n");
     return 0;
 }
 
