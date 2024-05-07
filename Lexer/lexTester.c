@@ -26,32 +26,25 @@ void stringMaker(){
 
 //compare output to expected output
 int lexTester(void){
-    //lexTest1
-    fp = popen("./scanner Tests/lexTest1_StdInput", "r");
-    stringMaker();
-    assert(!strcmp(lexTest1Output, content));
-    content = NULL;
-    printf("\nlexTest1 PASSED\n");
-
     //lexTest2
-    fp = popen("./scanner Tests/lexTest2_OnlyText", "r");
+    fp = popen("./scanner Lexer/LexTests/lexTest1_OnlyText", "r");
     stringMaker();
     assert(!strcmp(lexTest2Output, content));
-    printf("lexTest2 PASSED\n");
+    printf("lexTest1 PASSED\n");
     content = NULL;
 
     //lexTest3
-    fp = popen("./scanner Tests/lexTest3_StdInput", "r");
+    fp = popen("./scanner Lexer/LexTests/lexTest2_StdInput", "r");
     stringMaker();
     assert(!strcmp(lexTest3Output, content));
-    printf("lexTest3 PASSED\n");
+    printf("lexTest2 PASSED\n");
     content = NULL;
 
     //lextTest4
-    fp = popen("./scanner Tests/lexTest4_InvalidToken", "r");
+    fp = popen("./scanner Lexer/LexTests/lexTest3_InvalidToken", "r");
     stringMaker();
     assert(!strcmp(lexTest4Output, content));
-    printf("lexTest4 PASSED\n");
+    printf("lexTest3 PASSED\n");
     
     pclose(fp);
     free(content);
@@ -61,6 +54,7 @@ int lexTester(void){
 }
 
 int main(int argc, char *argv[]) {
+    printf("\nSTARTING TESTS\n\n");
     lexTester();
     return 0;
 }

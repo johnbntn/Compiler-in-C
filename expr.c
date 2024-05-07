@@ -45,10 +45,13 @@ struct ASTnode *binexpr(void) {
     left = primary();
 
     //if at EOF, just return left leaf
-    if (Token.token == EOF) return left;
+    if (Token.token == T_EOF) return left;
 
     //convert token to ast node
     nodetype = arithop(Token.token);
+
+    // Get the next token in
+    scan(&Token);
 
     //recursively make the right node
     right = binexpr();

@@ -1,8 +1,8 @@
-#include "Headers/defs.h"
+#include "../Headers/defs.h"
 #define extern_
-#include "Headers/data.h"
+#include "../Headers/data.h"
 #undef extern_
-#include "Headers/decl.h"
+#include "../Headers/decl.h"
 #include <errno.h>
 
 
@@ -16,22 +16,6 @@ static void init() {
 static void usage(char *prog) {
   fprintf(stderr, "Usage: %s infile\n", prog);
   exit(1);
-}
-
-// List of printable tokens
-char *tokstr[] = { "+", "-", "*", "/", "intlit" };
-
-// Loop scanning in all the tokens in the input file.
-// Print out details of each token found.
-static void scanfile() {
-  struct token T;
-
-  while (scan(&T)) {
-    printf("Token %s", tokstr[T.token]);
-    if (T.token == T_INTLIT)
-      printf(", value %d", T.intValue);
-    printf("\n");
-  }
 }
 
 // Main program: check arguments and print a usage
