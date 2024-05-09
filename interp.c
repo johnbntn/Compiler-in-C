@@ -4,6 +4,9 @@
 
 static char *ASTop[] = { "+", "-", "*", "/" };
 
+/// @brief Recursively iterate through AST starting at a node
+/// @param n: node to parse from (going to be initially called with root)
+/// @return parsed value
 int interpretAST(struct ASTnode *n) {
     int leftval, rightval;
 

@@ -2,7 +2,7 @@
 #include "Headers/defs.h"
 #include "Headers/decl.h"
 
-//general function to create AST nodes
+/// @brief Create ASTnode with parameter values
 struct ASTnode *mkastnode(int op, struct ASTnode *left, struct ASTnode *right, int intvalue) {
 
     struct ASTnode *n;
@@ -24,12 +24,12 @@ struct ASTnode *mkastnode(int op, struct ASTnode *left, struct ASTnode *right, i
     return n;
 }
 
-//function to create leaf nodes
+/// @brief Create leaf node
 struct ASTnode *mkastleaf(int op, int intvalue) {
     return mkastnode(op, NULL, NULL, intvalue);
 }
 
-//function to create nodes with only 1 child
+/// @brief Create node with only one child
 struct ASTnode *mkastunary(int op, struct ASTnode *left, int intvalue) {
     return mkastnode(op, left, NULL, intvalue);
 }

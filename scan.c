@@ -3,8 +3,10 @@
 #include "Headers/decl.h"
 #include <stdio.h>
 
-// Return the position of character c
-// in string s, or -1 if c not found
+/// @brief Return the position of character in string s, or -1 if c not found
+/// @param s string to be searched
+/// @param c char to be found
+/// @return position in string
 static int chrpos(char *s, int c) {
   char *p;
 
@@ -12,6 +14,9 @@ static int chrpos(char *s, int c) {
   return (p ? p - s : -1);
 }
 
+/// @brief Get next character in file or keep character if Putback exists
+/// @param
+/// @return next char
 static int next(void){
     int c;
 
@@ -30,10 +35,15 @@ static int next(void){
     return c;
 }
 
+/// @brief Putback unwanted character
+/// @param c 
 static void putback(int c) {
   Putback = c;
 }
 
+/// @brief Remove any whitespace
+/// @param  
+/// @return first non-whitespace char
 static int skip(void){
     int c;
 
@@ -47,6 +57,9 @@ static int skip(void){
     return c; 
 }
 
+/// @brief Create integer literal
+/// @param c: integer
+/// @return integer literal
 static int scanint(int c) {
   int k, val = 0;
 
@@ -61,6 +74,9 @@ static int scanint(int c) {
   return val;
 }
 
+/// @brief Get next token in file
+/// @param t pointer to token struct
+/// @return next token
 int scan(struct token *t) {
     int c;
 

@@ -2,7 +2,9 @@
 #include "Headers/defs.h"
 #include "Headers/decl.h"
 
-//convert tokens to AST nodes
+/// @brief convert tokens to AST node ops
+/// @param tok: token from lexer
+/// @return Element in AST Node enum
 int arithop(int tok){
     switch(tok) {
         case T_PLUS:
@@ -19,6 +21,9 @@ int arithop(int tok){
     }
 }
 
+/// @brief Parse primary factor and return it in an AST leaf
+/// @param void
+/// @return pointer to AST node containing primary factor
 static struct ASTnode *primary(void) {
     
     //create ASTnode to hold intlit
@@ -35,7 +40,7 @@ static struct ASTnode *primary(void) {
             exit(1);
     }
 }
-//create AST node tree recursively
+
 struct ASTnode *binexpr(void) {
 
     struct ASTnode *n, *left, *right;
