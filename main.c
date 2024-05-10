@@ -1,8 +1,8 @@
-#include "../Headers/defs.h"
+#include "Headers/defs.h"
 #define extern_
-#include "../Headers/data.h"
+#include "Headers/data.h"
 #undef extern_
-#include "../Headers/decl.h"
+#include "Headers/decl.h"
 #include <errno.h>
 
 
@@ -36,7 +36,7 @@ void main(int argc, char *argv[]) {
   }
 
   scan(&Token);                 // Get the first token from the input
-  n = binexpr();                // Parse the expression in the file
+  n = binexpr(0);                // Parse the expression in the file
   printf("%d\n", interpretAST(n));      // Calculate the final result
   exit(0);
 }

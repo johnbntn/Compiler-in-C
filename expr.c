@@ -21,6 +21,21 @@ int arithop(int tok){
     }
 }
 
+static int OpPrec[] = {0, 10, 10, 20, 20, 0}; //precedence for each token
+
+/// @brief Get precedence of token and find errors
+/// @param tok token
+/// @return precedence of token
+static int op_precedence(int tokentype) {
+    int prec = OpPrec[tokentype];
+
+    if (prec == 0) {
+        fprintf(stderr, "syntax error on line %d, token %d\n", Line, tokentype);
+        exit(1);
+    }
+  return prec;
+}
+
 /// @brief Parse primary factor and return it in an AST leaf
 /// @param void
 /// @return pointer to AST node containing primary factor
@@ -41,27 +56,33 @@ static struct ASTnode *primary(void) {
     }
 }
 
-struct ASTnode *binexpr(void) {
+/// @brief Create AST tree where root is operator
+/// @param ptp previous token's precedence (called w/ 0)
+/// @return AST node pointer
+struct ASTnode *binexpr(int ptp) {
 
-    struct ASTnode *n, *left, *right;
-    int nodetype;
+    struct ASTnode *left, *right;
+    int tokentype;
 
     //get int_lit on left and scan
     left = primary();
 
-    //if at EOF, just return left leaf
+    tokentype = Token.token; //make tokentype the current token
+
+    //if at EOF, return left leaf
     if (Token.token == T_EOF) return left;
 
-    //convert token to ast node
-    nodetype = arithop(Token.token);
+    while (op_precedence(tokentype) > ptp) {
+        scan(&Token);
 
-    // Get the next token in
-    scan(&Token);
+        right = binexpr(OpPrec[tokentype]);
 
-    //recursively make the right node
-    right = binexpr();
+        left = mkastnode(arithop(tokentype), left, right, 0);
 
-    //once recursion is done (reached EOF), create tree
-    n = mkastnode(nodetype, left, right, 0);
-    return n;
+        tokentype = Token.token;
+
+        if (tokentype == T_EOF) return left;
+    }
+
+    return left;
 }
