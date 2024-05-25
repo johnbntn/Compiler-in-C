@@ -2,19 +2,18 @@
 #include "Headers/defs.h"
 #include "Headers/decl.h"
 
-// List of available registers
-// and their names
+// List of available registers and their names
 static int freereg[4];
 static char *reglist[4]= { "r8", "r9", "r10", "r11" };
 
-// Set all registers as available
+/// @brief Set all registers as available
 void freeall_registers(void)
 {
   freereg[0]= freereg[1]= freereg[2]= freereg[3]= 1;
 }
 
-// Allocate a free register. Return the number of
-// the register. Die if no available registers.
+/// @brief Allocate free register
+/// @return number of register allocated
 static int alloc_register(void)
 {
   for (int i=0; i<4; i++) {
@@ -27,8 +26,8 @@ static int alloc_register(void)
   exit(1);
 }
 
-// Return a register to the list of available registers.
-// Check to see if it's not already there.
+/// @brief check register is free and then mark it as free in the array
+/// @param reg register trying to free
 static void free_register(int reg)
 {
   if (freereg[reg] != 0) {
@@ -38,7 +37,7 @@ static void free_register(int reg)
   freereg[reg]= 1;
 }
 
-// Print out the assembly preamble
+/// @brief print out assembly function preamble
 void cgpreamble()
 {
   freeall_registers();
@@ -67,7 +66,7 @@ void cgpreamble()
   Outfile);
 }
 
-// Print out the assembly postamble
+/// @brief Print out assembly postamble
 void cgpostamble()
 {
   fputs(
@@ -77,8 +76,9 @@ void cgpostamble()
   Outfile);
 }
 
-// Load an integer literal value into a register.
-// Return the number of the register
+/// @brief Load int value into register
+/// @param value to be loaded 
+/// @return Register number
 int cgload(int value) {
 
   // Get a new register
@@ -97,24 +97,31 @@ int cgadd(int r1, int r2) {
   return(r2);
 }
 
-// Subtract the second register from the first and
-// return the number of the register with the result
+/// @brief Subtract second register from first and place result in fist register
+/// @param r1
+/// @param r2
+/// @return Number of the register with the result
 int cgsub(int r1, int r2) {
   fprintf(Outfile, "\tsub\t%s, %s\n", reglist[r1], reglist[r2]);
   free_register(r2);
   return(r1);
 }
 
-// Multiply two registers together and return
-// the number of the register with the result
+/// @brief Multiply two registers and place result in another register
+/// @param r1
+/// @param r2 
+/// @return Number of register with the result
 int cgmul(int r1, int r2) {
   fprintf(Outfile, "\timul\t%s, %s\n", reglist[r2], reglist[r1]);
   free_register(r1);
   return(r2);
 }
 
-// Divide the first register by the second and
-// return the number of the register with the result
+
+/// @brief Divide first register by second and place result in another register
+/// @param r1 
+/// @param r2 
+/// @return Register with result
 int cgdiv(int r1, int r2) {
   fprintf(Outfile, "\tmov\trax, %s\n", reglist[r1]);
   fprintf(Outfile, "\tcqo\n");
@@ -124,7 +131,10 @@ int cgdiv(int r1, int r2) {
   return(r1);
 }
 
-// Call printint() with the given register
+
+
+/// @brief Print an integer in a register
+/// @param r register to be printed
 void cgprintint(int r) {
   fprintf(Outfile, "\tmov\trdi, %s\n", reglist[r]);
   fprintf(Outfile, "\tcall\tprintint\n");

@@ -2,7 +2,10 @@
 #include "Headers/defs.h"
 #include "Headers/decl.h"
 
-static int genAST(struct ASTnode *n) {
+/// @brief Generate AST by calling assembly language generator functions in correct order
+/// @param n starting node 
+/// @return result of assembly functions
+int genAST(struct ASTnode *n) {
     int leftreg, rightreg;
 
     //Generate AST left to right recursively
@@ -23,11 +26,15 @@ static int genAST(struct ASTnode *n) {
     }
 }
 
-void generatecode(struct ASTnode *n) {
-    int reg;
-
-    cgpreamble();
-    reg = genAST(n);
-    cgprintint(reg);
-    cgpostamble();
+void genpreamble() {
+  cgpreamble();
+}
+void genpostamble() {
+  cgpostamble();
+}
+void genfreeregs() {
+  freeall_registers();
+}
+void genprintint(int reg) {
+  cgprintint(reg);
 }

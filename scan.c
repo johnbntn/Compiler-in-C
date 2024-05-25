@@ -74,11 +74,52 @@ static int scanint(int c) {
   return val;
 }
 
+/// @brief Scan in identifiers
+/// @param c next character
+/// @param buf buffer holding characters
+/// @param lim length limit
+/// @return length of buffer
+static int scanident(int c, char *buf, int lim) {
+    int i = 0;
+    
+    //chars can be letters, numbers, and underscores
+    while (isalpha(c) || isdigit(c) || '_' == c) {
+
+        //store in buf if under length limit
+        if (lim - 1 == i) {
+            printf("Identifier too long on line %d\n", Line);
+            exit(1);
+        }
+        else if (i < lim - 1 ) {
+            buf[i++] = c;
+        }
+        c = next();
+    }
+
+    // We hit a non-valid character, put it back.
+    // NUL-terminate the buf[] and return the length
+    putback(c);
+    buf[i] = '\0';
+    return i;
+}
+
+/// @brief Recognizes keywords
+/// @param s potential keyword
+/// @return the keyword's token or a 0
+static int keyword(char *s) {
+    switch (*s) {
+        case 'p':
+            if (!strcmp(s, "print")) return T_PRINT;
+        break;
+    }
+    return 0;
+}
+
 /// @brief Get next token in file
 /// @param t pointer to token struct
 /// @return next token
 int scan(struct token *t) {
-    int c;
+    int c, tokentype;
 
     c = skip();
 
@@ -99,11 +140,29 @@ int scan(struct token *t) {
         case '/':
             t -> token = T_SLASH;
             break;
+        case ';':
+            t -> token = T_SEMI;
+            break;
         default:
+
             if (isdigit(c)) {
                 t -> intValue = scanint(c);
                 t -> token = T_INTLIT;
                 break;
+            }
+            else if (isalpha(c) || '_' == c) {
+                
+                //read in potential keyword
+                scanident(c, Text, TEXTLEN);
+                
+                //if it's recognized, assign it
+                if (tokentype = keyword(Text)) {
+                    t -> token = tokentype;
+                    break;
+                }
+                // Not a recognised keyword, so an error
+                printf("Unrecognised symbol %s on line %d\n", Text, Line);
+                exit(1);
             }
             printf("Unrecognizable token %c on line %d\n", c, Line);
             exit(1);

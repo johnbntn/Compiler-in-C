@@ -69,8 +69,8 @@ struct ASTnode *binexpr(int ptp) {
 
     tokentype = Token.token; //make tokentype the current token
 
-    //if at EOF, return left leaf
-    if (Token.token == T_EOF) return left;
+    //if at semicolon, return left leaf
+    if (Token.token == T_SEMI) return left;
 
     while (op_precedence(tokentype) > ptp) {
         scan(&Token);
@@ -81,7 +81,7 @@ struct ASTnode *binexpr(int ptp) {
 
         tokentype = Token.token;
 
-        if (tokentype == T_EOF) return left;
+        if (tokentype == T_SEMI) return left;
     }
 
     return left;
