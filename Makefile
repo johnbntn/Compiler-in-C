@@ -1,11 +1,13 @@
-compn: cgn.c expr.c gen.c interp.c main.c scan.c tree.c misc.c stmt.c
-	cc -o compn -g cgn.c expr.c gen.c interp.c main.c scan.c tree.c misc.c stmt.c
+SRCN= cgn.c decl.c expr.c gen.c main.c misc.c scan.c stmt.c sym.c tree.c
+
+compn: $(SRCN)
+	cc -o compn -g $(SRCN)
 
 clean:
 	rm -f comp1 compn *.o *.s out
 
-testn: compn
-	./compn test1
+testn: compn input02
+	./compn input02
 	nasm -f elf64 out.s
 	cc -no-pie -o out out.o
 	./out

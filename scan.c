@@ -1,7 +1,6 @@
-#include "Headers/data.h"
-#include "Headers/defs.h"
-#include "Headers/decl.h"
-#include <stdio.h>
+#include "data.h"
+#include "defs.h"
+#include "decl.h"
 
 /// @brief Return the position of character in string s, or -1 if c not found
 /// @param s string to be searched
@@ -111,6 +110,8 @@ static int keyword(char *s) {
         case 'p':
             if (!strcmp(s, "print")) return T_PRINT;
         break;
+        case 'i':
+            if (!strcmp(s, "int")) return T_INT;
     }
     return 0;
 }
@@ -160,9 +161,9 @@ int scan(struct token *t) {
                     t -> token = tokentype;
                     break;
                 }
-                // Not a recognised keyword, so an error
-                printf("Unrecognised symbol %s on line %d\n", Text, Line);
-                exit(1);
+                //Not recognized keyword, so must be variable
+                t -> token = T_IDENT;
+                break;
             }
             printf("Unrecognizable token %c on line %d\n", c, Line);
             exit(1);

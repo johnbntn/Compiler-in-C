@@ -1,6 +1,6 @@
-#include "Headers/data.h"
-#include "Headers/defs.h"
-#include "Headers/decl.h"
+#include "data.h"
+#include "defs.h"
+#include "decl.h"
 
 // List of available registers and their names
 static int freereg[4];
@@ -79,7 +79,7 @@ void cgpostamble()
 /// @brief Load int value into register
 /// @param value to be loaded 
 /// @return Register number
-int cgload(int value) {
+int cgloadint(int value) {
 
   // Get a new register
   int r= alloc_register();
@@ -139,4 +139,24 @@ void cgprintint(int r) {
   fprintf(Outfile, "\tmov\trdi, %s\n", reglist[r]);
   fprintf(Outfile, "\tcall\tprintint\n");
   free_register(r);
+}
+
+int cgloadglob(char *identifier) {
+  // Get a new register
+  int r = alloc_register();
+
+  // Print out the code to initialise it
+  fprintf(Outfile, "\tmov\t%s, [%s]\n", reglist[r], identifier);
+  return (r);
+}
+
+// Store a register's value into a variable
+int cgstorglob(int r, char *identifier) {
+  fprintf(Outfile, "\tmov\t[%s], %s\n", identifier, reglist[r]);
+  return (r);
+}
+
+// Generate a global symbol
+void cgglobsym(char *sym) {
+  fprintf(Outfile, "\tcommon\t%s 8:8\n", sym);
 }

@@ -1,6 +1,6 @@
-#include "Headers/data.h"
-#include "Headers/defs.h"
-#include "Headers/decl.h"
+#include "data.h"
+#include "defs.h"
+#include "decl.h"
 
 /// @brief convert tokens to AST node ops
 /// @param tok: token from lexer
@@ -40,20 +40,32 @@ static int op_precedence(int tokentype) {
 /// @param void
 /// @return pointer to AST node containing primary factor
 static struct ASTnode *primary(void) {
-    
-    //create ASTnode to hold intlit
     struct ASTnode *n;
+    int id;
 
-    //for intlit, make leaf and scan next token, otherwise error
     switch (Token.token) {
-        case(T_INTLIT):
-            n = mkastleaf(A_INTLIT, Token.intValue);
-            scan(&Token);
-            return n;
-        default:
-            fprintf(stderr, "syntax error on line %d\n", Line);
-            exit(1);
+    case T_INTLIT:
+        // For an INTLIT token, make a leaf AST node for it.
+        n = mkastleaf(A_INTLIT, Token.intValue);
+        break;
+
+    case T_IDENT:
+        // Check that this identifier exists
+        id = findglob(Text);
+        if (id == -1)
+        fatals("Unknown variable", Text);
+
+        // Make a leaf AST node for it
+        n = mkastleaf(A_IDENT, id);
+        break;
+
+    default:
+        fatald("Syntax error, token", Token.token);
     }
+
+    // Scan in the next token and return the leaf node
+    scan(&Token);
+    return (n);
 }
 
 /// @brief Create AST tree where root is operator

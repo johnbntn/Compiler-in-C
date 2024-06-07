@@ -1,8 +1,8 @@
-#include "Headers/defs.h"
+#include "defs.h"
 #define extern_
-#include "Headers/data.h"
+#include "data.h"
 #undef extern_
-#include "Headers/decl.h"
+#include "decl.h"
 #include <errno.h>
 
 
