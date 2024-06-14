@@ -27,13 +27,13 @@ void cgprintint(int r);
 void cgprintint(int r);
 int cgstorglob(int r, char *identifier);
 void cgglobsym(char *sym);
+int cgloadglob(char *identifier);
 
 // expr.c
 struct ASTnode *binexpr(int ptp);
 
 // stmt.c
 void statements(void);
-void print_statement(void);
 
 // misc.c
 void match(int t, char *what);

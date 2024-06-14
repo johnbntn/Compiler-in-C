@@ -3,10 +3,6 @@
 #include <stdio.h>
 #include <string.h>
 
-
-#define TEXTLEN 512 //Line length limit
-#define NSYMBOLS 1024	// Number of symbol table entries
-
 // Tokens
 enum {
   T_EOF, T_PLUS, T_MINUS, T_STAR, T_SLASH, T_INTLIT, T_SEMI, T_EQUALS, T_IDENT,
@@ -36,9 +32,4 @@ struct ASTnode {
     int intvalue;
     int id;
   } v;
-};
-
-//Symbol table
-struct symtable {
-  char *name;   //name of symbol
 };

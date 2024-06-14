@@ -38,5 +38,5 @@ void fatald(char *s, int d) {
 }
 
 void fatalc(char *s, int c) {
-    fprintf(stderr, "%s:%c on line %d\n", s, c, Line); exit(1);
+    fprintf(stderr, "%s: %c on line %d\n", s, c, Line); exit(1);
 }

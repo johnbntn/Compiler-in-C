@@ -18,28 +18,6 @@ void print_statement(void) {
     // Match the following semicolon
     semi();
 }
-void statements(void) {
-    struct ASTnode *tree;
-    int reg;
-
-    while (1) {
-        switch (Token.token) {
-    case T_PRINT:
-        print_statement();
-        break;
-    case T_INT:
-        var_declaration();
-        break;
-    case T_IDENT:
-        assignment_statement();
-        break;
-    case T_EOF:
-        return;
-    default:
-        fatald("Syntax error, token", Token.token);
-        }
-    }
-}
 
 void assignment_statement(void) {
     struct ASTnode *left, *right, *tree;
@@ -69,4 +47,27 @@ void assignment_statement(void) {
 
     // Match the following semicolon
     semi();
+}
+
+void statements(void) {
+    struct ASTnode *tree;
+    int reg;
+
+    while (1) {
+        switch (Token.token) {
+        case T_PRINT:
+            print_statement();
+            break;
+        case T_INT:
+            var_declaration();
+            break;
+        case T_IDENT:
+            assignment_statement();
+            break;
+        case T_EOF:
+            return;
+        default:
+            fatald("Syntax error, token", Token.token);
+            }
+    }
 }

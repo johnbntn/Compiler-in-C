@@ -144,30 +144,30 @@ int scan(struct token *t) {
         case ';':
             t -> token = T_SEMI;
             break;
+        case '=':
+            t -> token = T_EQUALS;
+            break;
         default:
-
             if (isdigit(c)) {
-                t -> intValue = scanint(c);
-                t -> token = T_INTLIT;
+                t-> intValue = scanint(c);
+                t->token = T_INTLIT;
                 break;
-            }
-            else if (isalpha(c) || '_' == c) {
-                
-                //read in potential keyword
+            } else if (isalpha(c) || '_' == c) {
+                // Read in a keyword or identifier
                 scanident(c, Text, TEXTLEN);
-                
-                //if it's recognized, assign it
+
+                // If it's a recognised keyword, return that token
                 if (tokentype = keyword(Text)) {
-                    t -> token = tokentype;
+                    t->token = tokentype;
                     break;
                 }
-                //Not recognized keyword, so must be variable
-                t -> token = T_IDENT;
+                // Not a recognised keyword, so it must be an identifier
+                t->token = T_IDENT;
                 break;
             }
-            printf("Unrecognizable token %c on line %d\n", c, Line);
-            exit(1);
-
-    }
+            // The character isn't part of any recognised token, error
+            fatalc("Unrecognised character", c);
+        }
+    // We found a token
     return 1;
 }

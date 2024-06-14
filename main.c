@@ -40,6 +40,7 @@ void main(int argc, char *argv[]) {
     fprintf(stderr, "Unable to create out.s: %s\n", strerror(errno));
     exit(1);
   }
+  
   scan(&Token);                  // Get the first token from the input
   genpreamble();                // Output the preamble
   statements();                 // Parse the statements in the input

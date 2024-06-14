@@ -6,14 +6,14 @@ static int Globs = 0;                   // Position of next free global symbol s
 
 /// @brief find variable in table
 /// @param s variable to be found
-/// @return 1 if found, 0 if not
+/// @return index if found, -1 if not
 int findglob(char *s) {
     int i;
 
     for (i = 0; i < Globs; i++) {
-        if (*s == *Gsym[i].name && !strcmp(s, Gsym[i].name)) return 1;
+        if (*s == *Gsym[i].name && !strcmp(s, Gsym[i].name)) return i;
     }
-    return 0;
+    return -1;
 }
 
 /// @brief Find unused index in symbol table

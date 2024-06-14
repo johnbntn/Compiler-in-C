@@ -52,8 +52,7 @@ static struct ASTnode *primary(void) {
     case T_IDENT:
         // Check that this identifier exists
         id = findglob(Text);
-        if (id == -1)
-        fatals("Unknown variable", Text);
+        if (id == -1) fatals("Unknown variable", Text);
 
         // Make a leaf AST node for it
         n = mkastleaf(A_IDENT, id);
