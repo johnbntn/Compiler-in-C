@@ -1,0 +1,4 @@
+int jim;
+jim = 3;
+fred = 7;
+print jim * fred;

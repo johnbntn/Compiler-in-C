@@ -17,10 +17,9 @@ int main (int argc, char *argv[]) {
         return -1;
     }
 
-    /* ==================== STD TEST ==================== */
-
+/* ==================== STD TEST ==================== */
     //compile into asm and check whether the file matches expected
-    system("./jlcc Tests/std_test");
+    system("./jlcc Tests/Units/std_test");
     system("diff -u out.s Tests/Expected/std_test_exp.s > Tests/std_test_result\n");
     tests += 1;
 
@@ -29,13 +28,13 @@ int main (int argc, char *argv[]) {
     if (status != 0) printf("Failed: std_test\n");
     else if (status == 0) {
         printf("Passed: std_test\n");
+        system("rm Tests/std_test_result");
         tests_passed += 1;
     }
+/* ==================== STD TEST ==================== */
 
-    /* ==================== STD TEST ==================== */
-
-    /* ==================== VARS TEST ==================== */
-    system("./jlcc Tests/vars_test");
+/* ==================== VARS TEST ==================== */
+    system("./jlcc Tests/Units/vars_test");
     system("diff -u out.s Tests/Expected/vars_test_exp.s > Tests/vars_test_result\n");
     tests += 1;
 
@@ -43,12 +42,13 @@ int main (int argc, char *argv[]) {
     if (status != 0) printf("Failed: vars_test\n");
     else if (status == 0) {
         printf("Passed: vars_test\n");
+        system("rm Tests/vars_test_result");
         tests_passed += 1;
     }
-    /* ==================== VARS TEST ==================== */
+/* ==================== VARS TEST ==================== */
 
-    /* ==================== SYNTAX TEST ==================== */
-    system("./jlcc Tests/syntax_test > Tests/syntax_test_output");
+/* ==================== SYNTAX TEST ==================== */
+    system("./jlcc Tests/Units/syntax_test > Tests/syntax_test_output");
     system("diff -u Tests/syntax_test_output Tests/Expected/syntax_test_exp > Tests/syntax_test_result");
     tests += 1;
 
@@ -56,12 +56,40 @@ int main (int argc, char *argv[]) {
     if (status != 0) printf("Failed: syntax_test\n");
     else if (status == 0) {
         printf("Passed: syntax_test\n");
+        system("rm Tests/syntax_test_result Tests/syntax_test_output");
         tests_passed += 1;
     }
-    /* ==================== SYNTAX TEST ==================== */
+/* ==================== SYNTAX TEST ==================== */
 
-    
+/* ==================== USAGE TEST ==================== */
+    system("./jlcc -option Tests/Units/syntax_test > Tests/usage_test_output");
+    system("diff -u Tests/usage_test_output Tests/Expected/usage_test_exp > Tests/usage_test_result");
+    tests += 1;
+
+    status = system("! test -s Tests/usage_test_result\n");
+    if (status != 0) printf("Failed: syntax_test\n");
+    else if (status == 0) {
+        printf("Passed: usage_test\n");
+        system("rm Tests/usage_test_result Tests/usage_test_output");
+        tests_passed += 1;
+    }
+/* ==================== USAGE TEST ==================== */
+
+/* ===================== UNDECLARED VARIABLE TEST ==================== */
+    system("./jlcc Tests/Units/unvar_test > Tests/unvar_test_output");
+    system("diff -u Tests/unvar_test_output Tests/Expected/unvar_test_exp > Tests/unvar_test_result");
+    tests += 1;
+
+    status = system("! test -s Tests/unvar_test_result\n");
+    if (status != 0) printf("Failed: unvar_test\n");
+    else if (status == 0) {
+        printf("Passed: unvar_test\n");
+        system("rm Tests/unvar_test_result Tests/unvar_test_output");
+        tests_passed += 1;
+    }
+/* ==================== UNDECLARED VARIABLE TEST ==================== */ 
+
+    printf("\nTests Passed: %d/%d\n", tests_passed, tests);
+    if (tests_passed == tests) printf("=======ALL TESTS PASSED=======\n");
     return 0;
-    
-
 }

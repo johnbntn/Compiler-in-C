@@ -19,3 +19,6 @@ printint:
 main:
 	push	rbp
 	mov	rbp, rsp
+	common	jim 8:8
+	mov	r8, 3
+	mov	[jim], r8
