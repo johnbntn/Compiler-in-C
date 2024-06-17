@@ -6,3 +6,5 @@ Assembly is the process of turning parsed tokens into assembly code so that it c
 ## Code Generation
 ### Pre/Post - amble 
 ### Registers
+### Print Call
+### Variable Creation

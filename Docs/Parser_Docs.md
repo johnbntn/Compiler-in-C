@@ -3,4 +3,6 @@ Parsing is when a program analyzes symbols according to the rules of a grammar. 
 
 ## Abstract Syntax Trees
 ### Nodes
-## Pratt Parsing
+### Pratt Parsing
+### Variable Declaration
+### Print Call

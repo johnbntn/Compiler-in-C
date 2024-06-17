@@ -49,6 +49,15 @@ void assignment_statement(void) {
     semi();
 }
 
+void var_declaration(void) {
+
+    match(T_INT, "int");
+    ident();
+    addglob(Text);
+    genglobsym(Text);
+    semi();
+}
+
 void statements(void) {
     struct ASTnode *tree;
     int reg;
