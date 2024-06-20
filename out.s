@@ -19,6 +19,17 @@ printint:
 main:
 	push	rbp
 	mov	rbp, rsp
+	common	fred 8:8
 	common	jim 8:8
-	mov	r8, 3
+	mov	r8, 5
+	mov	[fred], r8
+	mov	r8, 12
 	mov	[jim], r8
+	mov	r8, [fred]
+	mov	r9, [jim]
+	add	r9, r8
+	mov	rdi, r9
+	call	printint
+	mov	eax, 0
+	pop	rbp
+	ret
