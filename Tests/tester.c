@@ -19,7 +19,7 @@ int main (int argc, char *argv[]) {
 
 /* ==================== STD TEST ==================== */
     //compile into asm and check whether the file matches expected
-    system("./jlcc Tests/Units/std_test");
+    system("jlcc Tests/Units/std_test");
     system("diff -u out.s Tests/Expected/std_test_exp.s > Tests/std_test_result\n");
     tests += 1;
 
@@ -34,7 +34,7 @@ int main (int argc, char *argv[]) {
 /* ==================== STD TEST ==================== */
 
 /* ==================== VARS TEST ==================== */
-    system("./jlcc Tests/Units/vars_test");
+    system("jlcc Tests/Units/vars_test");
     system("diff -u out.s Tests/Expected/vars_test_exp.s > Tests/vars_test_result\n");
     tests += 1;
 
@@ -48,7 +48,7 @@ int main (int argc, char *argv[]) {
 /* ==================== VARS TEST ==================== */
 
 /* ==================== SYNTAX TEST ==================== */
-    system("./jlcc Tests/Units/syntax_test > Tests/syntax_test_output");
+    system("jlcc Tests/Units/syntax_test > Tests/syntax_test_output");
     system("diff -u Tests/syntax_test_output Tests/Expected/syntax_test_exp > Tests/syntax_test_result");
     tests += 1;
 
@@ -62,12 +62,12 @@ int main (int argc, char *argv[]) {
 /* ==================== SYNTAX TEST ==================== */
 
 /* ==================== USAGE TEST ==================== */
-    system("./jlcc -option Tests/Units/syntax_test > Tests/usage_test_output");
+    system("jlcc -option Tests/Units/syntax_test > Tests/usage_test_output");
     system("diff -u Tests/usage_test_output Tests/Expected/usage_test_exp > Tests/usage_test_result");
     tests += 1;
 
     status = system("! test -s Tests/usage_test_result\n");
-    if (status != 0) printf("Failed: syntax_test\n");
+    if (status != 0) printf("Failed: usage_test\n");
     else if (status == 0) {
         printf("Passed: usage_test\n");
         system("rm Tests/usage_test_result Tests/usage_test_output");
@@ -76,7 +76,7 @@ int main (int argc, char *argv[]) {
 /* ==================== USAGE TEST ==================== */
 
 /* ===================== UNDECLARED VARIABLE TEST ==================== */
-    system("./jlcc Tests/Units/unvar_test > Tests/unvar_test_output");
+    system("jlcc Tests/Units/unvar_test > Tests/unvar_test_output");
     system("diff -u Tests/unvar_test_output Tests/Expected/unvar_test_exp > Tests/unvar_test_result");
     tests += 1;
 
