@@ -16,9 +16,17 @@ struct ASTnode {
   } v;
 };
 ~~~
+The `op` field hold values similar to tokens but used only is the AST:
+```C
+// AST node types
+enum {
+  A_ADD, A_SUBTRACT, A_MULTIPLY, A_DIVIDE, A_INTLIT, 
+  A_LVIDENT, A_ASSIGN, A_IDENT
+};
+```
 ### Pratt Parsing
 Parsing an AST is done using a recursive descent algorithm, where the parser starts at the root node of the tree and works it's way down. However, with no modifications, parsers will not be able to account for operator precedence. Pratt Parsing is a type of recursive descent parsing algorithm that is able to account for precendence. This is done by first assigning each operator a precedence. Then, while parsing, if the current operator's precedence is greater than the previous', continue recursive descent. Otherwise, return the left subtree.
 ### Variable Declaration
-Variable declaration is handled using a global symbol table that is added to whenever a T_INT (integer variable token) is found by the parser. To assign a value to these variables, the parser looks for the T_IDENT (variable identifier token) and adds a value to the pre-existing entry in the symbol table.
+Variable declaration is handled using a global symbol table that is added to whenever a T_INT (integer variable token) is found by the parser. To assign a value to these variables, the parser looks for the T_IDENT (variable identifier token) and adds a value to the pre-existing entry in the symbol table. Variable assignment is handled by saving the Global Symbol index of the variable in the right subtree and the parsed expression in the left.
 ### Print Call
 Printing values is handled by the parser looking for T_PRINT tokens and generating an AST for the following expression.
