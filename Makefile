@@ -1,6 +1,6 @@
 SRCN= cgn.c expr.c gen.c main.c misc.c scan.c stmt.c sym.c tree.c
 
-jlcc: $(SRCN)
+jlcc: $(SRCN) assemble.c
 	gcc -o jlcc -g $(SRCN)
 	gcc -o asm -g assemble.c
 

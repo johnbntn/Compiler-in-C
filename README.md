@@ -14,5 +14,7 @@ The assembly code will be in the `out.s` file. To generate a binary, run:
 `./asm out.s`
 ## Testing
 To test the compiler with the tests in `Tests/Units` run `./tester`. To add tests, edit the `tester.c` file and run `make tester` to recompiler.
+## Future Updates
+In the future, I want to add functionality for Docker.
 
 For more information on the language, refer to the [documentation](Docs/)
