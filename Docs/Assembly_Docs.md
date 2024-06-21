@@ -1,5 +1,5 @@
 # Code Assembly
-Assembly is the process of turning parsed tokens into assembly code so that it can be executed. For this compiler, I'm generating NASM code.
+Assembly is the process of turning parsed tokens into assembly code so that it can be executed. For this compiler, I'm generating x86-64 code.
 
 ## Abstraction in `gen.c`
 All functions that pipe NASM code to an Outfile are contained in the function `cgn.c`. However, all of these functions can only be called by the functions contained in `gen.c`, which can be called from anywhere. This creates a more easily understood control flow.

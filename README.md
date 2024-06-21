@@ -1,7 +1,8 @@
 # Compiler-in-C
 
-I'll be making a compiler using C that will compile a simple programming language that I'll be calling Little C.
-Compilers can be thought of as 4 directives:
+I'll be making a compiler using C that will compile a simple programming language that I'll be calling Little C. The compiler will target Intel x86-64 bit architecture. To assemble the code, I use NASM for Ubuntu.
+
+Compilers can be thought of as 3 directives:
 1. Lexical Analysis (lexer)
 2. Parsing (parser)
 3. Assembling (assembler)
